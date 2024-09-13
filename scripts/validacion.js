@@ -21,7 +21,7 @@ function validarString(msg = " "){
             alert("Por favor, complete el campo")
             datoValido = false;
         }
-        else if (zen.trim() === " "){
+        else if (zen === " "){
             alert("Por favor, no deje el campo vacio!!")
             datoValido = false;
         }
@@ -61,3 +61,5 @@ function validarID(msg = "") {
 
     return foo;
 }
+//Validar rango y que no exista...
+// Function de validación de duración
