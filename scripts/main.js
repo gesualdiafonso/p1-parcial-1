@@ -2,7 +2,7 @@
 
 //Incializando arrays de discos y sus Ids usados
 let discos = [];
-let codigosUsados = [];
+let codigoUsado = [];
 
 /*
  * APELLIDO, NOMBRE | APELLIDO, NOMBRE
@@ -18,7 +18,7 @@ function cargar() {
 
         //Adicionamos el Id a los ya usados
 
-        codigosUsados.push(idDisco);
+        codigoUsado.push(idDisco);
 
         //Criamos un nuevo disco
 
