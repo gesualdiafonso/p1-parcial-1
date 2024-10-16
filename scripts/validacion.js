@@ -71,9 +71,3 @@ function validarID(msg = "", idsExistentes = []) {
 
     return entrada;
 }
-
-// Function de validación de duración
-
-function validarDuracion(){
-
-}
