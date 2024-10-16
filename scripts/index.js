@@ -9,10 +9,10 @@ class Pistas{
 }
 
 class Disco {
-    constructor(nombre, id, duracion, pistas){
+    constructor(nombre, id){
         this.nombre = nombre;
         this.id = id;
-        this.duracion = duracion;
+        //this.duracion = duracion;
         this.pistas = [];
     }
     adicionarPista(pista){

@@ -2,7 +2,7 @@
 
 //Incializando arrays de discos y sus Ids usados
 let discos = [];
-let codigoUsado = [];
+let codigosUsados = [];
 
 /*
  * APELLIDO, NOMBRE | APELLIDO, NOMBRE
@@ -11,35 +11,36 @@ let codigoUsado = [];
 
 function cargar() {
     // TODO
-    do{
-        //damos pase a las validaciones
-        const nombreDisco = validarString("Ingrese el nombre del disco:"); //valida el nombre
-        const idDisco = validarID(`Insira el Id del disco:`, codigosUsados); //valida el Id
+    do {
+        // Validamos el nombre del disco
+        const nombreDisco = validarString("Ingrese el nombre del disco:");
+        const idDisco = validarID(`Ingrese el Id del disco:`, codigosUsados);
 
-        //Adicionamos el Id a los ya usados
+        // Añadimos el Id a los ya usados
+        codigosUsados.push(idDisco);
 
-        codigoUsado.push(idDisco);
-
-        //Criamos un nuevo disco
-
+        // Creamos un nuevo disco fuera del bucle interno
         const nuevoDisco = new Disco(nombreDisco, idDisco);
 
-        let seguir
-        do{
-            const nombrePista = validarString("insira el nombre de las pistas:");
-            const duracionPistas = validarString("informe la duración de los albuns, en MM:SS")
-            const nuevaPista = new Pistas(nombrePista, duracionPistas);
+        let seguir;
+        do {
+            const nombrePista = validarString("Ingrese el nombre de la pista:");
+            const duracionPista = validarString("Informe la duración de la pista en MM:SS");
+            const nuevaPista = new Pistas(nombrePista, duracionPista);
+            
+            // Añadir pista al disco
             nuevoDisco.adicionarPista(nuevaPista);
 
-            seguir = confirm("Desea seguir cargando otras canciones")
-        }while(seguir)
+            seguir = confirm("¿Desea seguir agregando canciones?");
+        } while (seguir);
 
+        // Añadimos el disco al array de discos
+        discos.push(nuevoDisco);
 
-    }while(confirm("Deseas seguir cargando nuevos disco?"))
-    
-    discos.push(nuevoDisco)
+        alert(`El disco ${nombreDisco} con el Id ${idDisco}, ha sido cargado con éxito!`);
+        console.log(nuevoDisco);  // Mostramos el disco en la consola
 
-    alert(`El disco ${nombreDisco} con el Id ${idDisco}, ha sido cargado con suceso!`)
+    } while (confirm("¿Deseas seguir cargando nuevos discos?"));
 }
 
 /**
@@ -47,4 +48,23 @@ function cargar() {
  */
 function mostrar() {
     // TODO
+    // Verificamos si hay discos cargados
+    if (discos.length === 0) {
+        console.log("No hay discos cargados.");
+        return;
+    }
+
+    // Iteramos sobre los discos y mostramos su información
+    discos.forEach((disco, index) => {
+        console.log(`Disco ${index + 1}:`);
+        console.log(`Nombre: ${disco.nombre}`);
+        console.log(`ID: ${disco.id}`);
+        console.log(`Pistas:`);
+
+        disco.pistas.forEach((pista, idx) => {
+            console.log(`  ${idx + 1}. ${pista.nombre} | Duración: ${pista.duracion}`);
+        });
+
+        console.log("------------------------------");
+    });
 };
