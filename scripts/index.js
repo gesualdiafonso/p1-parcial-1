@@ -11,7 +11,7 @@ class Pista {
 class Disco {
     constructor(nombre, artista, id, portada){
         this.nombre = nombre;
-        this.artista = artista
+        this.artista = artista;
         this.id = id;
         this.portada = portada;
         this.pistas = []
@@ -30,7 +30,7 @@ class Disco {
                         <li>Id: ${this.id}</li>
                         <li><img src="${this.portada}" alt="Portada del disco ${this.discografia}"></li>
                         <li>Pistas:
-                            <ul>
+                            <ul class="pistas">
             `;
             for(let pista of this.pistas){
                 html += `<li>${pista.nombre} | Duración: ${pista.duracion}</li>`;

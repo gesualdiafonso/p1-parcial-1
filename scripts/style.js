@@ -20,7 +20,7 @@ class Biblioteca {
                     //adicionamos las pistas a los disco
 
                     for(let pista of disco.pistas){
-                        const nuevaPista = new Pista(pista.cancion, pista.duracion);
+                        const nuevaPista = new Pista(pista.nombre, pista.duracion);
                         nuevoDisco.adicionarPista(nuevaPista);
 
                     }
