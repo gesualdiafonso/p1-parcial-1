@@ -1,10 +1,3 @@
-// Debe ser validado el nombre del auto o banda
-// Debe ser valiado el codigo
-// Debe ser validado el nombre del disco
-// Debe ser validado nombre de las pista
-// Debe ser validado la duración de las pista
-
-
 'use strict'
 /**
  * Validamos las strings de disco
@@ -69,5 +62,31 @@ function validarID(msg = "", idsExistentes = []) {
     } 
     while(!datoValido);
 
+    return entrada;
+}
+
+/**
+ * 
+ * @param {string} msg 
+ * @returns un string valido
+ */
+function validarDuracion(msg = "Ingrese la duración en MM:SS") {
+    let datoValido;
+    let entrada;
+    do {
+        entrada = prompt(msg);
+        if (!entrada.includes(":")) {
+            alert("Por favor, ingrese la duración en formato MM:SS");
+            datoValido = false;
+        } else {
+            const totalSegundos = convertToSeconds(entrada);
+            if (isNaN(totalSegundos) || totalSegundos < 0 || totalSegundos > 7200) {
+                alert("La duración debe estar entre 0 y 7200 segundos (120 minutos)");
+                datoValido = false;
+            } else {
+                datoValido = true;
+            }
+        }
+    } while (!datoValido);
     return entrada;
 }
