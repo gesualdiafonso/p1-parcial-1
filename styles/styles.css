@@ -137,7 +137,7 @@ img{
     width: 100%;
     height: auto;
     border: 3px solid rgb(253, 253, 253) ;
-    background-color: rgba(99, 9, 61, 0.484);
+    /*background-color: rgba(99, 9, 61, 0.484);*/
     font-size: 1.5rem;
     padding: 2rem;
     margin: 2rem auto;
@@ -153,6 +153,8 @@ img{
     background-color: #8f1c1c;
     border: 1px solid gray;
     margin: 1.6rem auto;
+    border-radius: 20px;
+    padding: 2rem;
 }
 /**
  * Web
