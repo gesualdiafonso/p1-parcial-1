@@ -21,6 +21,32 @@ class Disco {
         this.pistas.push(pista);
     }
 
+    // Método para contar o número de faixas
+    getTotalPistas() {
+        return this.pistas.length;
+    }
+
+    // Método para calcular a duração total do disco
+    getDuracionTotal() {
+        let totalSegundos = 0;
+        for (let pista of this.pistas) {
+            totalSegundos += convertToSeconds(pista.duracion);
+        }
+        return convertSecondsToMMSS(totalSegundos); // Converte para MM:SS
+    }
+
+    // Método para pegar a faixa com a maior duração
+    getPistaMaisLarga() {
+        let pistaLarga = this.pistas[0];
+        for (let pista of this.pistas) {
+            if (convertToSeconds(pista.duracion) > convertToSeconds(pistaLarga.duracion)) {
+                pistaLarga = pista;
+            }
+        }
+        return pistaLarga;
+    }
+
+
     toHTML(){
         let html =
             `<div class="discos">
@@ -29,6 +55,9 @@ class Disco {
                         <li>Autor: ${this.artista}</li>
                         <li>Id: ${this.id}</li>
                         <li><img src="${this.portada}" alt="Portada del disco ${this.discografia}"></li>
+                        <li>Total de pistas: ${this.getTotalPistas()}</li>
+                        <li>Duración total: ${this.getDuracionTotal()}</li>
+                        <li>Pista más larga: ${this.getPistaMaisLarga().nombre} (${this.getPistaMaisLarga().duracion})</li>
                         <li>Pistas:
                             <ul class="pistas">
             `;
