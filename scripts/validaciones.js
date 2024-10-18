@@ -66,19 +66,29 @@ function validarID(msg = "", idsExistentes = []) {
 }
 
 /**
- * 
- * @param {string} msg 
- * @returns un string valido
+ * Valida la duración ingresada por el usuario en segundos o formato MM:SS
+ * @param {string} msg mensaje para el prompt
+ * @returns un string en formato MM:SS
  */
-function validarDuracion(msg = "Ingrese la duración en MM:SS") {
+function validarDuracion(msg = "Ingrese la duración en MM:SS o en segundos") {
     let datoValido;
     let entrada;
     do {
         entrada = prompt(msg);
-        if (!entrada.includes(":")) {
-            alert("Por favor, ingrese la duración en formato MM:SS");
-            datoValido = false;
-        } else {
+        
+        // Si el usuario ingresa un número, se convierte a formato MM:SS
+        if (!isNaN(entrada) && entrada.trim() !== "") {
+            const segundos = parseInt(entrada);
+            if (segundos >= 0 && segundos <= 7200) { // Verifica que los segundos estén en el rango
+                entrada = convertSecondsToMMSS(segundos); // Convierte a MM:SS
+                datoValido = true;
+            } else {
+                alert("La duración debe estar entre 0 y 7200 segundos (120 minutos)");
+                datoValido = false;
+            }
+        } 
+        // Si el usuario ingresa en formato MM:SS, validamos y convertimos a segundos
+        else if (entrada.includes(":")) {
             const totalSegundos = convertToSeconds(entrada);
             if (isNaN(totalSegundos) || totalSegundos < 0 || totalSegundos > 7200) {
                 alert("La duración debe estar entre 0 y 7200 segundos (120 minutos)");
@@ -86,7 +96,35 @@ function validarDuracion(msg = "Ingrese la duración en MM:SS") {
             } else {
                 datoValido = true;
             }
+        } 
+        // Si no es ni número ni formato MM:SS, es inválido
+        else {
+            alert("Por favor, ingrese la duración en formato MM:SS o en segundos");
+            datoValido = false;
         }
     } while (!datoValido);
     return entrada;
+}
+
+/**
+ * Convierte una duración en formato MM:SS a segundos
+ * @param {string} duracion
+ * @returns {number} duración en segundos
+ */
+function convertToSeconds(duracion) {
+    const partes = duracion.split(":");
+    const minutos = parseInt(partes[0], 10);
+    const segundos = parseInt(partes[1], 10);
+    return minutos * 60 + segundos;
+}
+
+/**
+ * Convierte una duración en segundos al formato MM:SS
+ * @param {number} segundos
+ * @returns {string} duración en formato MM:SS
+ */
+function convertSecondsToMMSS(segundos) {
+    const minutos = Math.floor(segundos / 60);
+    const segundosRestantes = segundos % 60;
+    return `${minutos}:${segundosRestantes < 10 ? "0" : ""}${segundosRestantes}`;
 }
